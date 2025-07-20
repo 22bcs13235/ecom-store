@@ -3,7 +3,6 @@ import { useCart } from '../context/CartContext';
 export default function ProductCard({ product, view = 'grid' }) {
   const { addToCart } = useCart();
 
-  // ➜ dimensions: square in grid, w-32×h-32 in list
   const imgWrapperClass =
     view === 'list'
       ? 'w-32 h-32 mr-4 flex-shrink-0'
@@ -15,7 +14,6 @@ export default function ProductCard({ product, view = 'grid' }) {
         view === 'list' ? 'flex-row' : 'flex-col'
       }`}
     >
-      {/* image wrapper keeps a square box */}
       <div className={`${imgWrapperClass} overflow-hidden`}>
         <img
           src={product.image}
