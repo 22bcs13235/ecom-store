@@ -32,10 +32,8 @@ app.get('/api/products', async (req, res) => {
   }
   res.json(products);
 });
-// -----------------------------------------------------
 
-// --------------- Cart (in-memory demo) ---------------
-const carts = {}; // { sessionId: [ { productId, quantity } ] }
+const carts = {}; 
 
 app.post('/api/cart', (req, res) => {
   const { sessionId, productId, quantity = 1 } = req.body;
@@ -67,9 +65,7 @@ app.delete('/api/cart/:sessionId/:productId', (req, res) => {
   carts[sessionId] = carts[sessionId].filter(i => i.productId !== productId);
   res.json(carts[sessionId]);
 });
-// -----------------------------------------------------
 
-// -------------------- Stripe checkout ----------------
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_yourkey');
 
 app.post('/api/checkout/create-session', async (req, res) => {
@@ -103,6 +99,5 @@ app.post('/api/checkout/create-session', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-// -----------------------------------------------------
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
